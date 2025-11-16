@@ -45,7 +45,7 @@ public class ControladorPeliculas {
     @GetMapping("/director/{nombre}")
     public String obtenerPeliculasPorDirector(@PathVariable String nombre) {
         String resultado = "";
-        for (String pelicula : listaPeliculas.keySet()) {
+        for (String pelicula : peliculas) {
             if (listaPeliculas.get(pelicula).equalsIgnoreCase(nombre)) {
             resultado += " Título: " + pelicula + ",";
             }
