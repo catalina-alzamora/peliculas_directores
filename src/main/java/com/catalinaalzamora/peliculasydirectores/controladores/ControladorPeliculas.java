@@ -1,7 +1,6 @@
 package com.catalinaalzamora.peliculasydirectores.controladores;
 
 import java.util.HashMap;
-import java.util.Set;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/peliculas")
 public class ControladorPeliculas {
     private static HashMap<String, String> listaPeliculas = new HashMap<String, String>();
-    Set<String> peliculas = listaPeliculas.keySet();
 
     public ControladorPeliculas() {
 	    listaPeliculas.put("Winnie the Pooh", "Don Hall");	
@@ -26,7 +24,7 @@ public class ControladorPeliculas {
     @GetMapping
     public String obtenerTodasLasPeliculas(){
         String lista = "";
-        for (String pelicula : peliculas) {
+        for (String pelicula : listaPeliculas.keySet()) {
             lista += ("Titulo: " + pelicula + ", Director: " + listaPeliculas.get(pelicula));
         }
         return ("Catálogo de películas" + lista);
@@ -34,7 +32,7 @@ public class ControladorPeliculas {
 
     @GetMapping("/{nombre}")
     public String obtenerPeliculaPorNombre(@PathVariable String nombre) {
-        for (String pelicula : peliculas) {
+        for (String pelicula : listaPeliculas.keySet()) {
             if (pelicula.equalsIgnoreCase(nombre)) {
                 return  (" Titulo: " + pelicula + " Director: " + listaPeliculas.get(pelicula));
             }
@@ -45,7 +43,7 @@ public class ControladorPeliculas {
     @GetMapping("/director/{nombre}")
     public String obtenerPeliculasPorDirector(@PathVariable String nombre) {
         String resultado = "";
-        for (String pelicula : peliculas) {
+        for (String pelicula : listaPeliculas.keySet()) {
             if (listaPeliculas.get(pelicula).equalsIgnoreCase(nombre)) {
             resultado += " Título: " + pelicula + ",";
             }
